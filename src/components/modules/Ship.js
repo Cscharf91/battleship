@@ -8,6 +8,8 @@ const Ship = (length, x, y, direction) => {
         if (isSunk()) return 'sunk';
     };
 
+    const getHits = () => hits;
+
     const getLocations = () => {
         let locations = [];
         if (direction === 'horizontal') {
@@ -25,7 +27,7 @@ const Ship = (length, x, y, direction) => {
         }
     }
 
-    return { length, sunkStatus, takeHit, hits, getLocations };
+    return { length, sunkStatus, takeHit, hits, getLocations, getHits };
 }
 
 export default Ship;

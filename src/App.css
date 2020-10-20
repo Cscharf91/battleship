@@ -2,20 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-header {
+  background-color: #020069;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,15 +13,40 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.created-by {
+  font-size: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.board-grid {
+  margin: auto;
+  width: 300px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.cell {
+  height: 30px;
+  width: 30px;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 1px solid;
+}
+
+.player-grids-container {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* grid-gap: 50px; */
+}
+
+.p1-ship {
+  background: blue;
+}
+
+.hit {
+  background: rgb(15, 71, 1);
+}
+
+.attacked {
+  background: rgb(71, 1, 1);
 }

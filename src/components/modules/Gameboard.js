@@ -19,20 +19,23 @@ const Gameboard = (gridTemplate) => {
 
     const checkShipLength = (x, y, length, direction) => {
         let freeSpace = true;
-        if (direction === 'horizontal') {
+        if ((direction === 'horizontal' && x + length > 10) || (direction === 'vertical' && y + length > 10) || x > 9 || y > 9) {
+            freeSpace = false;
+        } else if (direction === 'horizontal' && x + length < 10) {
             for (let i = 0; i < length; i++) {
                 let coords = getCoords(x + i, y)
                 if (coords !== '') {
                     freeSpace = false;
                 }
+                if (freeSpace === false) return;
             }
-        }
-        if (direction === 'vertical') {
+        } else if (direction === 'vertical' && y + length < 10) {
             for (let i = 0; i < length; i++) {
                 let coords = getCoords(x, y + i)
                 if (coords !== '') {
                     freeSpace = false;
                 }
+                if (freeSpace === false) return;
             }
         }
         return freeSpace;
@@ -43,6 +46,7 @@ const Gameboard = (gridTemplate) => {
             const ship = Ship(length, x, y);
             ships.push(ship);
             setCoords(x, y, ship, direction);
+            return 'placed';
         }
     }
 
@@ -66,7 +70,6 @@ const Gameboard = (gridTemplate) => {
 
     const checkForWin = () => {
         let sunkShips = [];
-        // console.log('ships: ' + ships);
         ships.forEach(ship => {
             if (ship.sunkStatus() === true) sunkShips.push(ship);
         })
@@ -79,20 +82,20 @@ const Gameboard = (gridTemplate) => {
         if (location === '') {
             setCoords(x, y, 'X', null);
             return getCoords(x, y);
-        }
-        if (location !== '' || location !== 'X' || location !== 'XX') {
+        } else if (location !== '' && location !== 'X' && location !== 'XX') {
             const ship = getCoords(x, y);
+            setCoords(x, y, 'XX', null);
             if (ship.takeHit() === 'sunk') {
-                setCoords(x, y, 'XX', null);
+                console.log(`ship: ${ship.getHits()}`);
+                // setCoords(x, y, 'XX', null);
                 if (checkForWin() === true) return 'Winner!';
                 return 'sunk';
             }
-            setCoords(x, y, 'XX', null);
-            return getCoords(x, y);
+            // return getCoords(x, y);
         }
     }
 
-    return { getGrid, getCoords, placeShip, receiveAttack, getShips }
+    return { getGrid, getCoords, placeShip, receiveAttack, getShips, checkShipLength, checkForWin }
 }
 
 export default Gameboard;

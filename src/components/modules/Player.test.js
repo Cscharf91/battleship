@@ -13,7 +13,7 @@ test('CPU Player randomly places its ships', () => {
     const p2board = Gameboard([]);
     const p1 = Player('cpu', p1board, p2board);
     p1.cpuPlaceShips();
-    expect(p2board.getShips().length).toBe(9);
+    expect(p1board.getShips().length).toBe(9);
 })
 
 test('CPU Player randomly makes a legal move', () => {
@@ -22,6 +22,5 @@ test('CPU Player randomly makes a legal move', () => {
     const p1 = Player('cpu', p1board, p2board);
     p1.makeRandomPlay();
     const [x, y] = p1.getMoves()[0];
-    console.log(p1board.getCoords(x, y));
-    expect(p1board.getCoords(x, y)).toBe('X');
+    expect(p2board.getCoords(x, y)).toBe('X');
 })
